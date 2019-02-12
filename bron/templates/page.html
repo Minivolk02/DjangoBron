@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>PKCINEMA - Бронирование</title>
+	
+	{% load staticfiles %}
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static 'css/mainqes.css' %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900' rel='stylesheet' type='text/css'>
+	<link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+	<link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<style>
+	   form input[type="button"]:hover { background: rgba(255,255,255,.2); }
+	   form input[type="button"]:active { background: green; }
+	
+	
+		.intro-header .site-heading h1, .intro-header .page-heading h1 {
+				font-size: 130px;
+				font-family: Roboto, sans-serif;
+			}
+	
+	
+		#rectangle {
+			width: 600px;
+			height: 120px;
+			background: white;
+			border: 3px solid black;
+			color: black;
+		}
+		.select-style {
+			border: 1px solid #ccc;
+			width: 30%;
+			border-radius: 3px;
+			overflow: hidden;
+			background: #FFF no-repeat 90% 50%;
+		}
+
+		.select-style select {
+			padding: 10px 10px;
+			width: 100%;
+			border: none;
+			box-shadow: none;
+			background: #000;
+			color: white;
+			background-image: none;
+			-webkit-appearance: none;
+			text-align: center;
+			text-align-last: center;
+		}
+		.select-style select:focus {
+			outline: none;
+		}
+	   form input[type="button"] {
+			width: 2px;
+			display: inline-block;
+			color: black;
+			font-weight: 700;
+			padding: 7px 25px;
+			outline: none;
+			border: 2px solid;
+			border-radius: 10px;
+			transition: 0.2s;
+	   }
+	   
+	   .form-group input {
+			color: black;
+	   }
+	   
+	   @media (min-width: 1200px) { 
+			form input[type="button"] {
+				padding: .5em 2em;
+			}
+			
+			.btn {
+				width: 275px;
+			}
+			
+			table {
+				display: inline;
+				margin: 30px;
+			}
+			
+			.intro-header .site-heading h1, .intro-header .page-heading h1 {
+				font-size: 120px;
+			}
+		}
+	   /* Portrait tablet to landscape and desktop */
+		@media (min-width: 811px) and (max-width: 1200px) {
+			.intro-header .site-heading h1, .intro-header .page-heading h1 {
+				font-size: 115px;
+			}
+			table {
+				display: table-cell;
+			}
+				
+			.home-text h1 {
+				font-size: 65px;
+			}
+			
+			.modal-body input {
+				width: 500px;
+			}
+			
+			.select-style {
+				width: 737px;
+				text-align: center;
+			}
+			
+			table {
+				display: table-cell;
+			}
+			
+			#btn1 {
+				margin-left: 40px;
+				width: 300px;
+			}
+			
+			.select-style select {
+				padding: 20px 10px;
+			}
+			
+			.form-group input {
+				height: 50px;
+			}
+		}
+		 
+		/* Landscape phone to portrait tablet */
+		@media (min-width:700px) and (max-width: 810px) {
+			body {
+				width: 800px;
+			}
+				
+			.home-text h1 {
+				font-size: 65px;
+			}
+			
+			.modal-body input {
+				width: 500px;
+			}
+			
+			.select-style {
+				width: 737px;
+				text-align: center;
+			}
+			
+			header {
+				width: 800px;
+			}
+			
+			.navbar {
+				width: 800px;
+			}
+			
+			table {
+				display: table-cell;
+			}
+			
+			#btn1 {
+				margin-left: 40px;
+				width: 300px;
+			}
+			
+			.select-style select {
+				padding: 20px 10px;
+			}
+			
+			.form-group input {
+				height: 50px;
+			}
+			
+			.intro-header .site-heading h1,
+			.intro-header .page-heading h1 {
+				font-size: 110px;
+				font-family: Roboto, sans-serif;;
+			}
+			
+			.navbar-toggle {
+				padding: 20px 30px;
+			}
+			
+			.navbar-custom .navbar-brand {
+				font-size: 25px;
+			}
+			
+			.navbar-custom .nav li a {
+				font-size: 13px;
+				margin: 10px;
+			}
+			
+			.intro-header .page-heading {
+				height: 370px;
+			}
+		}
+	
+		 
+		/* Landscape phones and down */
+		@media (max-width: 699px) {
+			
+			body {
+				width: 799px;
+			}
+				
+			.home-text h1 {
+				font-size: 65px;
+			}
+			
+			.modal-body input {
+				width: 500px;
+			}
+			
+			.select-style {
+				width: 737px;
+				text-align: center;
+			}
+			
+			header {
+				width: 799px;
+			}
+			
+			.navbar {
+				width: 799px;
+			}
+			
+			table {
+				display: table-cell;
+			}
+			
+			#btn1 {
+				margin-left: 40px;
+				width: 300px;
+			}
+			
+			.select-style select {
+				padding: 20px 10px;
+			}
+			
+			.form-group input {
+				height: 50px;
+			}
+			
+			.intro-header .site-heading h1,
+			.intro-header .page-heading h1 {
+				font-size: 90px;
+				font-family: Roboto, sans-serif;;
+			}
+			
+			.navbar-toggle {
+				padding: 20px 30px;
+			}
+			
+			.navbar-custom .navbar-brand {
+				font-size: 30px;
+			}
+			
+			.navbar-custom .nav li a {
+				font-size: 19px;
+				margin: 10px;
+			}
+			
+			.intro-header .page-heading {
+				height: 370px;
+			}
+		}
+	</style>
+
+</head>
+
+<body onload = "LoadBooking()">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+				<a class="navbar-brand" href="/">Покровский квартал</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <nav class="nav navbar-nav navbar-right">
+				  <li>
+                        <a href="/">О НАС</a>
+                  </li>
+                  <li>
+                        <a href="/brony">МЕРОПРИЯТИЯ</a>
+                  </li>
+                  <li>
+                        <a href="/contact">КОНТАКТЫ</a>
+                  </li>
+				</nav>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('{% static 'img/pokrovka1.jpg' %}')">
+        <div class="container overlay">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>БРОНИРОВАНИЕ</h1>
+                        <hr class="small">
+						<span class="subheading">Большой Трёхсвятительский пер., 4</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	<!--SERVICES AREA-->
+<section id="service">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12  wow bounce">
+				<div class="section-heading text-center text-uppercase  wow bounceInUp">
+					<h2>НАШИ <span>МЕСТА</span></h2>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form method="POST" name = "form" id="StasForm" onsubmit="return false;">
+			<input type="hidden" id="merop" value="{{ merop }}">
+				<div class="row">
+					<center>
+						<div id="rectangle">
+							<h1 style="text-align-last:center; text-align:center">Сцена</h1>
+						</div>
+					</center>
+				</div>
+				<div class="row">
+					<center>
+							<table class="table">
+									<tbody>
+										<tr>
+											<th scope="row">1</th>
+											<td><input type = "button" name = "s1_r1" value = "1"></td>
+											<td><input type = "button" name = "s2_r1" value = "2"></td>
+											<td><input type = "button" name = "s3_r1" value = "3"></td>
+											<td><input type = "button" name = "s4_r1" value = "4"></td>
+											<td><input type = "button" name = "s5_r1" value = "5"></td>
+										</tr>
+										<tr>
+											<th scope="row">2</th>
+											<th><input type = "button" name = "s1_r2" value = "1"></th>
+											<th><input type = "button" name = "s2_r2" value = "2"></th>
+											<th><input type = "button" name = "s3_r2" value = "3"></th>
+											<th><input type = "button" name = "s4_r2" value = "4"></th>
+											<th><input type = "button" name = "s5_r2" value = "5"></th>
+										</tr>
+										<tr>
+											<th scope="row">3</th>
+											<th><input type = "button" name = "s1_r3" value = "1"></th>
+											<th><input type = "button" name = "s2_r3" value = "2"></th>
+											<th><input type = "button" name = "s3_r3" value = "3"></th>
+											<th><input type = "button" name = "s4_r3" value = "4"></th>
+											<th><input type = "button" name = "s5_r3" value = "5"></th>
+										</tr>
+										<tr>
+											<th scope="row">4</th>
+											<th><input type = "button" name = "s1_r4" value = "1"></th>
+											<th><input type = "button" name = "s2_r4" value = "2"></th>
+											<th><input type = "button" name = "s3_r4" value = "3"></th>
+											<th><input type = "button" name = "s4_r4" value = "4"></th>
+											<th><input type = "button" name = "s5_r4" value = "5"></th>
+										</tr>
+										<tr>
+											<th scope="row">5</th>
+											<th><input type = "button" name = "s1_r5" value = "1"></th>
+											<th><input type = "button" name = "s2_r5" value = "2"></th>
+											<th><input type = "button" name = "s3_r5" value = "3"></th>
+											<th><input type = "button" name = "s4_r5" value = "4"></th>
+											<th><input type = "button" name = "s5_r5" value = "5"></th>
+										</tr>
+										<tr>
+											<th scope="row">6</th>
+											<th><input type = "button" name = "s1_r6" value = "1"></th>
+											<th><input type = "button" name = "s2_r6" value = "2"></th>
+											<th><input type = "button" name = "s3_r6" value = "3"></th>
+											<th><input type = "button" name = "s4_r6" value = "4"></th>
+											<th><input type = "button" name = "s5_r6" value = "5"></th>
+										</tr>
+										<tr>
+											<th scope="row">7</th>
+											<th><input type = "button" name = "s1_r7" value = "1"></th>
+											<th><input type = "button" name = "s2_r7" value = "2"></th>
+											<th><input type = "button" name = "s3_r7" value = "3"></th>
+											<th><input type = "button" name = "s4_r7" value = "4"></th>
+											<th><input type = "button" name = "s5_r7" value = "5"></th>
+										</tr>
+										<tr>
+											<th scope="row">8</th>
+											<th><input type = "button" name = "s1_r8" value = "1"></th>
+											<th><input type = "button" name = "s2_r8" value = "2"></th>
+											<th><input type = "button" name = "s3_r8" value = "3"></th>
+											<th><input type = "button" name = "s4_r8" value = "4"></th>
+											<th><input type = "button" name = "s5_r8" value = "5"></th>
+										</tr>
+										<tr>
+											<th scope="row">9</th>
+											<th><input type = "button" name = "s1_r9" value = "1"></th>
+											<th><input type = "button" name = "s2_r9" value = "2"></th>
+											<th><input type = "button" name = "s3_r9" value = "3"></th>
+											<th><input type = "button" name = "s4_r9" value = "4"></th>
+											<th><input type = "button" name = "s5_r9" value = "5"></th>
+										</tr>
+										<tr>
+											<th scope="row">10</th>
+											<th><input type = "button" name = "s1_r10" value = "1"></th>
+											<th><input type = "button" name = "s2_r10" value = "2"></th>
+											<th><input type = "button" name = "s3_r10" value = "3"></th>
+											<th><input type = "button" name = "s4_r10" value = "4"></th>
+											<th><input type = "button" name = "s5_r10" value = "5"></th>
+										</tr>
+										<tr>
+											<th scope="row">11</th>
+											<th><input type = "button" name = "s1_r11" value = "1"></th>
+											<th><input type = "button" name = "s2_r11" value = "2"></th>
+											<th><input type = "button" name = "s3_r11" value = "3"></th>
+											<th><input type = "button" name = "s4_r11" value = "4"></th>
+											<th><input type = "button" name = "s5_r11" value = "5"></th>
+										</tr>
+										<tr>
+											<th scope="row">12</th>
+											<th><input type = "button" name = "s1_r12" value = "1"></th>
+											<th><input type = "button" name = "s2_r12" value = "2"></th>
+											<th><input type = "button" name = "s3_r12" value = "3"></th>
+											<th><input type = "button" name = "s4_r12" value = "4"></th>
+											<th><input type = "button" name = "s5_r12" value = "5"></th>
+										</tr>
+										<tr>
+											<th scope="row">13</th>
+											<th><input type = "button" name = "s1_r13" value = "1"></th>
+											<th><input type = "button" name = "s2_r13" value = "2"></th>
+											<th><input type = "button" name = "s3_r13" value = "3"></th>
+											<th><input type = "button" name = "s4_r13" value = "4"></th>
+											<th><input type = "button" name = "s5_r13" value = "5"></th>
+										</tr>
+										<tr>
+											<th scope="row">14</th>
+											<th><input type = "button" name = "s1_r14" value = "1"></th>
+											<th><input type = "button" name = "s2_r14" value = "2"></th>
+											<th><input type = "button" name = "s3_r14" value = "3"></th>
+											<th><input type = "button" name = "s4_r14" value = "4"></th>
+											<th><input type = "button" name = "s5_r14" value = "5"></th>
+										</tr>
+								</tbody>
+							</table>
+							<table class="table">
+								<tbody>
+											<tr>
+												<th><input type = "button" name = "s6_r1" value = "6"></th>
+												<th><input type = "button" name = "s7_r1" value = "7"></th>
+												<th><input type = "button" name = "s8_r1" value = "8"></th>
+												<th><input type = "button" name = "s9_r1" value = "9"></th>
+												<th><input type = "button" name = "s10_r1" value = "10"></th>
+												<th scope="row">1</th>
+											</tr>
+											<tr>
+												<th><input type = "button" name = "s6_r2" value = "6"></th>
+												<th><input type = "button" name = "s7_r2" value = "7"></th>
+												<th><input type = "button" name = "s8_r2" value = "8"></th>
+												<th><input type = "button" name = "s9_r2" value = "9"></th>
+												<th><input type = "button" name = "s10_r2" value = "10"></th>
+												<th scope="row">2</th>
+											</tr>
+											<tr>
+												<th><input type = "button" name = "s6_r3" value = "6"></th>
+												<th><input type = "button" name = "s7_r3" value = "7"></th>
+												<th><input type = "button" name = "s8_r3" value = "8"></th>
+												<th><input type = "button" name = "s9_r3" value = "9"></th>
+												<th><input type = "button" name = "s10_r3" value = "10"></th>
+												<th scope="row">3</th>
+											</tr>
+											<tr>
+												<td><input type = "button" name = "s6_r4" value = "6"></th>
+												<td><input type = "button" name = "s7_r4" value = "7"></th>
+												<td><input type = "button" name = "s8_r4" value = "8"></th>
+												<td><input type = "button" name = "s9_r4" value = "9"></th>
+												<td><input type = "button" name = "s10_r4" value = "10"></th>
+												<th scope="row">4</th>
+											</tr>
+											<tr>
+												<th><input type = "button" name = "s6_r5" value = "6"></th>
+												<th><input type = "button" name = "s7_r5" value = "7"></th>
+												<th><input type = "button" name = "s8_r5" value = "8"></th>
+												<th><input type = "button" name = "s9_r5" value = "9"></th>
+												<th><input type = "button" name = "s10_r5" value = "10"></th>
+												<th scope="row">5</th>
+											</tr>
+											<tr>
+												<th><input type = "button" name = "s6_r6" value = "6"></th>
+												<th><input type = "button" name = "s7_r6" value = "7"></th>
+												<th><input type = "button" name = "s8_r6" value = "8"></th>
+												<th><input type = "button" name = "s9_r6" value = "9"></th>
+												<th><input type = "button" name = "s10_r6" value = "10"></th>
+												<th scope="row">6</th>
+											</tr>
+											<tr>
+												<th><input type = "button" name = "s6_r7" value = "6"></th>
+												<th><input type = "button" name = "s7_r7" value = "7"></th>
+												<th><input type = "button" name = "s8_r7" value = "8"></th>
+												<th><input type = "button" name = "s9_r7" value = "9"></th>
+												<th><input type = "button" name = "s10_r7" value = "10"></th>
+												<th scope="row">7</th>
+											</tr>
+											<tr>
+												<th><input type = "button" name = "s6_r8" value = "6"></th>
+												<th><input type = "button" name = "s7_r8" value = "7"></th>
+												<th><input type = "button" name = "s8_r8" value = "8"></th>
+												<th><input type = "button" name = "s9_r8" value = "9"></th>
+												<th><input type = "button" name = "s10_r8" value = "10"></th>
+												<th scope="row">8</th>
+											</tr>
+											<tr>
+												<th><input type = "button" name = "s6_r9" value = "6"></th>
+												<th><input type = "button" name = "s7_r9" value = "7"></th>
+												<th><input type = "button" name = "s8_r9" value = "8"></th>
+												<th><input type = "button" name = "s9_r9" value = "9"></th>
+												<th><input type = "button" name = "s10_r9" value = "10"></th>
+												<th scope="row">9</th>
+											</tr>
+											<tr>
+												<th><input type = "button" name = "s6_r10" value = "6"></th>
+												<th><input type = "button" name = "s7_r10" value = "7"></th>
+												<th><input type = "button" name = "s8_r10" value = "8"></th>
+												<th><input type = "button" name = "s9_r10" value = "9"></th>
+												<th><input type = "button" name = "s10_r10" value = "10"></th>
+												<th scope="row">10</th>
+											</tr>
+											<tr>
+												<th><input type = "button" name = "s6_r11" value = "6"></th>
+												<th><input type = "button" name = "s7_r11" value = "7"></th>
+												<th><input type = "button" name = "s8_r11" value = "8"></th>
+												<th><input type = "button" name = "s9_r11" value = "9"></th>
+												<th><input type = "button" name = "s10_r11" value = "10"></th>
+												<th scope="row">11</th>
+											</tr>
+											<tr>
+												<th><input type = "button" name = "s6_r12" value = "6"></th>
+												<th><input type = "button" name = "s7_r12" value = "7"></th>
+												<th><input type = "button" name = "s8_r12" value = "8"></th>
+												<th><input type = "button" name = "s9_r12" value = "9"></th>
+												<th><input type = "button" name = "s10_r12" value = "10"></th>
+												<th scope="row">12</th>
+											</tr>
+											<tr>
+												<th><input type = "button" name = "s6_r13" value = "6"></th>
+												<th><input type = "button" name = "s7_r13" value = "7"></th>
+												<th><input type = "button" name = "s8_r13" value = "8"></th>
+												<th><input type = "button" name = "s9_r13" value = "9"></th>
+												<th><input type = "button" name = "s10_r13" value = "10"></th>
+												<th scope="row">13</th>
+											</tr>
+											<tr>
+												<th><input type = "button" name = "s6_r14" value = "6"></th>
+												<th><input type = "button" name = "s7_r14" value = "7"></th>
+												<th><input type = "button" name = "s8_r14" value = "8"></th>
+												<th><input type = "button" name = "s9_r14" value = "9"></th>
+												<th><input type = "button" name = "s10_r14" value = "10"></th>
+												<th scope="row">14</th>
+											</tr>
+								</tbody>
+							</table>
+					</center>
+				</div>
+		</form>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+					<center>
+						<form>
+							<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:black; border: 2px solid #ccc; color: white;" id="btn1">
+								ЗАБРОНИРОВАТЬ
+							</button>
+							<p></p>
+						<!-- Modal -->
+							<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+							  <div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content" style="background-color: black; color: white;">
+								  <div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">ВВЕДИТЕ СВОИ ДАННЫЕ</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									  <span aria-hidden="true">&times;</span>
+									</button>
+								  </div>
+									  <div class="modal-body">
+											{% csrf_token %}
+											<div>
+											{% for field in form %}
+											<div class="form-group">
+												{{field.label_tag}}
+												<div>{{field}}</div>
+												{% for error in field.errors %}
+												<div class="alert alert-danger">{{error}}</div>
+												{% endfor %}
+											</div>
+											{% endfor %}
+											</div>
+									  </div>
+								  <div class="modal-footer">
+									<a type="button" class="btn btn-dark" data-dismiss="modal" style="border: 2px solid #ccc">Close</a>
+									<a type="submit" class="btn btn-success" id = "SaveBooking" style="border: 2px solid #ccc">ОТПРАВИТЬ</a>
+								  </div>
+								</div>
+							  </div>
+							  <img src="{% static 'img/spinner.gif' %}" id = "loading" style ="visibility:hidden;">
+						</form>
+					</center>
+			</div>
+		</div>
+	</div>
+</section>
+	
+	<script type="text/javascript">
+            //Color change
+		    document.getElementById("StasForm").addEventListener("click", setColor);            
+		    //document.getElementById("PostBron").addEventListener("click", OnPost);			
+			document.getElementById("SaveBooking").addEventListener("click", Shower); 
+
+			
+            var fl_Booked = document.getElementById("id_booked");
+			var fl_name = document.getElementById("id_name");
+			
+			
+			function OnPageLoaded()
+			{
+                var form_Elem = document.getElementById('StasForm');
+				var elements = form_Elem.getElementsByTagName('input');
+				
+				if (document.getElementById("Selector").value == "dis")
+				{
+					for (var i = 0; i < elements.length; i++)
+					{ 
+						var elem = elements[i]; 
+						if (elem.name[0]=="s")
+						{ 
+							elem.style.backgroundColor="lightgray";
+							elem.disabled = true;
+						}
+					}
+				}
+			}
+			
+			function ComposeBookingString ()
+			{
+                var form_Elem = document.getElementById('StasForm');
+                var elements = form_Elem.getElementsByTagName('input');
+				var s="";
+				for (var i = 0; i < elements.length; i++){ 
+                    var elem = elements[i];
+					if (elem.name[0]=="s" && elem.style.backgroundColor=="red") 
+                        s+=(s==""?"":",")+elem.name;
+                }
+				return s;
+			}
+               
+            function setColor(e)
+			{
+					if (e.type=="click" && e.target.tagName=="INPUT" && e.target.name[0] == "s")
+					{
+						if (e.target.style.backgroundColor == "red")
+						{
+							var form_Elem = document.getElementById('StasForm');
+							var elements = form_Elem.getElementsByTagName('input');
+							
+							e.target.style.backgroundColor = "lightgray";
+							
+							if (ComposeBookingString() == "")
+                            {
+                                document.getElementById('btn1').disabled = true;
+                            }
+							
+							var comma = ',';
+							var prov = ComposeBookingString().split(comma);
+							
+							if (prov.length < 5)
+							{
+								for (var i = 0; i < elements.length; i++){ 
+									var elem = elements[i];
+									if (prov.indexOf(elem.name)>=0 || elem.style.backgroundColor=="black")
+									{ 
+										continue;
+									}
+									else if (elem.name[0]=="s")
+									{
+										elem.style.backgroundColor="lightgray";
+										elem.disabled = false;
+									}
+								}	
+							}
+						}
+						else
+						{
+							var form_Elem = document.getElementById('StasForm');
+							var elements = form_Elem.getElementsByTagName('input');
+							
+							e.target.style.backgroundColor = "red";
+							
+							if (ComposeBookingString() != "")
+                            {
+                                document.getElementById('btn1').disabled = false;
+                            }
+							
+							var comma = ',';
+							var prov = ComposeBookingString().split(comma);
+							
+							if (prov.length >= 5)
+							{
+								for (var i = 0; i < elements.length; i++)
+								{ 
+									var elem = elements[i]; 
+										if (prov.indexOf(elem.name)>=0 || elem.style.backgroundColor=="black")
+										{ 
+											continue;
+										}
+										else if (elem.name[0]=="s") 
+										{
+											elem.style.backgroundColor="lightgray";
+											elem.disabled = true;
+										}
+								}
+							}
+							
+						}
+					}
+			}
+
+
+            function LoadBooking()
+			{
+				var SrvRet="";
+				$.ajax({url: 'query',
+                type: 'GET',
+                data:{Command: "LoadBooking", DataString: "nothing", merop: document.getElementById("merop").value},
+                async: false,
+                success: function(data){
+                    var form_Elem = document.getElementById('StasForm');
+                    var elements = form_Elem.getElementsByTagName('input');
+                    var comma = ',';
+                    unclickable = data.split(comma);
+                    for (var j = 0; j < elements.length; j++){ 
+                        var elem = elements[j];
+                        if (unclickable.indexOf(elem.name)>=0 && elem.name[0]=="s"){
+                            elem.style.backgroundColor="black";
+                            elem.disabled = true;
+                        }
+                        else if (elem.name[0]=="s"){ 
+                            elem.style.backgroundColor="lightgray";
+                            elem.disabled = false;
+                        }
+                    }
+					document.getElementById('btn1').disabled = true;
+                },
+                failure: function(data){
+						swal({
+						title: "Ошибка!",
+						text: "Что-то пошло не так((",
+						icon: "error",
+						})
+						.then((value) => {
+						location.reload(true);
+						});
+                    }
+                });
+			}
+			
+			function SaveBooking()
+            {
+				if (ComposeBookingString() == "")
+				{
+					swal({
+					title: "Внимание!",
+					text: "Вы не выбрали ни одного места!",
+					icon: "warning",
+					})
+					.then((value) => {
+					location.reload(true);
+					});
+				}
+				var SrvRet="";
+				Object2Send={Command: "SaveBooking",
+					DataString: ComposeBookingString(),
+                    name: document.getElementById("id_name").value,
+                    email: document.getElementById("id_email").value,
+                    mero: document.getElementById("merop").value
+                }
+				$.ajax({url: 'query',
+					type: 'GET',
+					data: Object2Send,
+					async: false,
+					beforeSend: function(){
+						document.getElementById("SaveBooking").style.backgroundColor = "gray";
+						document.getElementById("SaveBooking").disabled = true;
+					},
+					success: function(data){					
+						document.getElementById("loading").style.visibility = "hidden";
+						document.getElementById("SaveBooking").style.backgroundColor = "#5cb85c;";
+						document.getElementById("SaveBooking").disabled = false;
+						SrvRet=data;
+						},
+					failure: function(data){
+							swal({
+							title: "Ошибка!",
+							text: "Что-то пошло не так((",
+							icon: "error",
+							})
+							.then((value) => {
+							location.reload(true);
+							});
+						}
+					});
+					if (SrvRet == "бронь")
+					{
+						swal({
+						title: "Поздравляем!",
+						text: "Вы успешно забронировали билеты",
+						icon: "success",
+						})
+						.then((value) => {
+						location.reload(true);
+						});
+					}
+					else if (SrvRet == "места")
+					{
+						swal({
+						title: "Внимание!",
+						text: "Больше 5 мест забронировать нельзя",
+						icon: "warning",
+						})
+						.then((value) => {
+						location.reload(true);
+						});
+					}
+					else if (SrvRet == "ошибка")
+					{
+						swal({
+						title: "Ошибка!",
+						text: "Что-то пошло не так((",
+						icon: "error",
+						})
+						.then((value) => {
+						location.reload(true);
+						});
+					}
+			}
+			
+			function Shower()
+			{
+					if (ComposeBookingString() == "" || document.getElementById("id_name").value == "" || document.getElementById("id_email").value == "")
+				{
+					swal({
+						title: "Ошибка!",
+						text: "Вы не выбрали места",
+						icon: "error",
+						buttons: true,
+						})
+						.then((value) => {
+						location.reload(true);
+						});
+				}
+				else 
+				{
+					document.getElementById("SaveBooking").style.backgroundColor = "gray";
+					document.getElementById("SaveBooking").disabled = true;
+
+					document.getElementById("loading").style.visibility = "visible";
+					setTimeout(SaveBooking, 500);
+				}
+			}
+			
+			function DeleteBooking()
+            {
+                
+                $.ajax({url: 'query',
+                type: 'GET',
+                data: {Command: "DeleteBooking"},
+                success: function(data){
+                    alert(data);
+                    location.reload(true);
+                    }
+                });
+            }
+</script>
+
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'js/small-business.js' %}"></script>
+
+    <!-- Smooth Scroll -->
+    <script src="{% static 'js/SmoothScroll.js' %}"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+
+</html>

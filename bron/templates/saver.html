@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+	<body onload = "SaveBooking()">
+		<img src="{% static 'img/spinner.gif' %}" id = "loading">
+		<input type="hidden" id = "places" value = "{{places}}">
+		<input type="hidden" id = "merop" value = "{{merop}}">
+		<input type="hidden" id = "name" value = "{{name}}">
+		<input type="hidden" id = "email" value = "{{email}}">
+	</body>
+	<script>
+		function SaveBooking()
+            {
+				var SrvRet="";
+				Object2Send={ Command = "SaveBooking",
+					DataString:  document.getElementById("places").value,
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    mero: document.getElementById("merop").value
+                }
+				$.ajax({url: 'query',
+					type: 'GET',
+					data: Object2Send,
+					async: false,
+					success: function(data){					
+						SrvRet=data;
+						},
+					failure: function(data){
+							swal({
+							title: "Ошибка!",
+							text: "Что-то пошло не так((",
+							icon: "error",
+							})
+							.then((value) => {
+							location.reload(true);
+							});
+						}
+					});
+					if (SrvRet == "бронь")
+					{
+						swal({
+						title: "Поздравляем!",
+						text: "Вы успешно забронировали билеты",
+						icon: "success",
+						buttons: true,
+						})
+						.then((value) => {
+						location.reload(true);
+						});
+					}
+					else if (SrvRet == "места")
+					{
+						swal({
+						title: "Внимание!",
+						text: "Больше 5 мест забронировать нельзя",
+						icon: "warning",
+						})
+					}
+					else if (SrvRet == "ошибка")
+					{
+						swal({
+						title: "Ошибка!",
+						text: "Что-то пошло не так((",
+						icon: "error",
+						})
+						.then((value) => {
+						location.reload(true);
+						});
+					}
+			}
+	</script>
+</html>

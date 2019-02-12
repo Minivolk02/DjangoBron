@@ -1,0 +1,26 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | Admin panel Stasa and Yarik{% endblock %}
+
+{% block extrastyle %}
+
+
+<style>
+    #header{
+        background-color:black;
+    }
+
+    #branding h1, #branding h1 a:link, #branding h1 a:visited {
+        color: #00ff43;
+    }
+</style>
+
+
+{% endblock %}
+
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Admin panel Stasa and Yarik</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
